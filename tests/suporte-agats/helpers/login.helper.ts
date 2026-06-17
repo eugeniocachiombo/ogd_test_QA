@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export async function auth(page:Page, username:string, password:string, company:string) {
+export async function auth(page:Page, username:string, password:string, company:string, url:string) {
 
     await page.fill("#inputUsername", username);
     await page.fill("#inputPassword", password);
@@ -11,7 +11,7 @@ export async function auth(page:Page, username:string, password:string, company:
         .click();
 
     await Promise.all([
-        page.waitForURL('https://ogd.operatecangola.com/home'),
+        page.waitForURL(url+'/home'),
         page.locator("button[type='submit']").click()
     ]);
 }
