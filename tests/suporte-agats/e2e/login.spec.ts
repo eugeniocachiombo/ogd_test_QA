@@ -11,8 +11,6 @@ test('Suporte Agats: Teste de Login', async ({ page }) => {
     const company = String(process.env.OGD_COMPANY);
 
     await page.goto('https://ogd.operatecangola.com/');
-    await auth(page, username, password, company);
-    await page.waitForLoadState('networkidle');
-    
+    await auth(page, username, password, company);    
     await page.pause();
 });
