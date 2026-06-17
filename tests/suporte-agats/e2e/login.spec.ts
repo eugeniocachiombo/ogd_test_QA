@@ -12,5 +12,7 @@ test('Suporte Agats: Teste de Login', async ({ page }) => {
 
     await page.goto('https://ogd.operatecangola.com/');
     await auth(page, username, password, company);
+    await page.waitForLoadState('networkidle');
+    
     await page.pause();
 });

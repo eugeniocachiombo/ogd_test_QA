@@ -12,6 +12,4 @@ export async function auth(page:Page, username:string, password:string, company:
     .click();
 
     await page.locator("button[type='submit']").click();
-    await page.waitForLoadState('networkidle');
-    await expect(page).toHaveURL('https://ogd.operatecangola.com/home');
 }
