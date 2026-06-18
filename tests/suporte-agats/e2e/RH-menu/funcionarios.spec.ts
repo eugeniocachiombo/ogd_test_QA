@@ -38,10 +38,10 @@ test.beforeEach(async ({ page }) => {
 });
 
 
-test('RH > Funcionários > Validações gerais', async ({ page }) => {
+test('RH > Funcionários ', async ({ page }) => {
 
-
-    await test.step('Validar criação de funcionário pelo botão New', async () => {
+   
+   await test.step('Validar criação de funcionário pelo botão New', async () => {
 
         await page
             .getByRole('link', { name: 'New' })
@@ -99,6 +99,25 @@ test('RH > Funcionários > Validações gerais', async ({ page }) => {
     });
 
 
+    await test.step('Validar exportação Excel', async () => {
+
+        await page
+            .getByRole('button', { name: /Excel/i })
+            .click();
+
+        const download = page.waitForEvent('download');
+
+        const file = await download;
+
+
+        expect(
+            file.suggestedFilename(),
+            'Deve gerar um arquivo PDF'
+        )
+        .toMatch(/\.xlsx$/);
+
+    });
+
 
     await test.step('Validar exportação PDF', async () => {
 
@@ -139,6 +158,12 @@ test('RH > Funcionários > Validações gerais', async ({ page }) => {
 
     });
 
+    await test.step('Validar impressão do documento do funcionário ', async () => {
+
+        await page.locator('a[href="employee/1/export"]').click();
+
+    });
+
 
 
     await test.step('Pesquisar funcionário existente', async () => {
@@ -147,5 +172,6 @@ test('RH > Funcionários > Validações gerais', async ({ page }) => {
 
         await search.fill('a');
     });
+
 
 });
